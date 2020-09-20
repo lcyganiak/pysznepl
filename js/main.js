@@ -1,51 +1,56 @@
-// const mainBtn = document.getElementsByClassName('btn');
-// console.log("mainBtn button po klasie", mainBtn)
-// const input = document.getElementsByClassName('margin-bottom');
-// console.log("input po klasie", input)
-
-
-// trowrzy , i dodaje elemnty do strony 
-
 const idBtn = document.getElementById('id-btn');
-// let btn = document.createElement("button");
-// btn.setAttribute('class', 'fun')
-// btn.innerText = "click me"
-// console.log(btn)
-// const maindiv = document.getElementById('main-div')
-// maindiv.appendChild(btn)
-// let span = document.createElement('span')
-// span.innerText = "<button> hi hi </button>"
-// let span2 = document.createElement('span')
-// span2.innerHTML = " hi hi jestem inner Html"
-// maindiv.appendChild(span)
-// maindiv.appendChild(span2)
-
-
-
-idBtn.addEventListener("click", takeOrder)
-
-function takeOrder() {
-    sprawdzanieSosow("sosy")
-    const pomidorowy = document.getElementById('pomidorowy')
-    const czosnkowy = document.getElementById('czosnkowy')
-    const ostryPomidorowy = document.getElementById('ostryPomidorowy')
-    console.log(document.styleSheets)
-
-
-
-
+let order = {
+    pizza: '',
+    sosy: [],
+    name: '',
+    adress: '',
+    email: '',
+    tel: '',
+    text: '',
+    napoje: []
 }
-console.log(btn)
-function sprawdzanieSosow(nazwaKlasy) {
+idBtn.addEventListener("click", takeOrder)
+function sprawdzaniecheckBox(nazwaKlasy) {
+    console.log(nazwaKlasy)
     const pobraneWszytkieSosyZinputu = document.getElementsByClassName(nazwaKlasy)
-    for (let i = 0; i < pobraneWszytkieSosyZinputu.length; i++) {
-        // console.log(pobraneWszytkieSosyZinputu[i])
-        if (pobraneWszytkieSosyZinputu[i].checked === true) {
-            console.log(pobraneWszytkieSosyZinputu[i].attributes)
+    if (nazwaKlasy === "sosy") {
+        for (let i = 0; i < pobraneWszytkieSosyZinputu.length; i++) {
+            order.sosy.push(pobraneWszytkieSosyZinputu[i].checked)
+        }
+    } else {
+        for (let i = 0; i < pobraneWszytkieSosyZinputu.length; i++) {
+            order.napoje.push(pobraneWszytkieSosyZinputu[i].checked)
         }
     }
 }
+function takeOrder() {
+    sprawdzaniecheckBox("sosy")
+    sprawdzaniecheckBox("napoje")
+    // pobieram imię i nazwisko z input 
+    const nameC = document.getElementById('nameC').value
+    order.name = nameC
+    // pobieram email z input 
+    const email = document.getElementById('email').value
+    order.email = email
+    // pobieram telefon z input 
+    const tel = document.getElementById('tel').value
+    order.tel = tel
+    // pobieram adress
+    const adress = document.getElementById('adress')
+    order.adress = adress
+    // pobieram textarea 
+    const msg = document.getElementById('msg').value
+    order.text = msg
+    console.log("takeOrder -> nameC", order)
+}
 
+// function odejmowanie() {
+//     console.log(1 == "1")
+//     console.log(2 + "1")
+//     let j = 152558
+//     console.log(typeof j)
+// }
+// odejmowanie()
 
 // function dodawanie(a, b) {
 //     let wynik = a + b
